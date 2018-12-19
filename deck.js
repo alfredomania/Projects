@@ -1,6 +1,7 @@
 class Deck{
   constructor(){
     this.deck = [];
+
   }
   makeDeck(){
     let card = (value, suit) =>{
@@ -9,28 +10,31 @@ class Deck{
       this.cardName = value + ' of ' + suit;
       return {cardName:this.cardName, suit:this.suit, value:this.value}
     }
-    let values = ['2','3','4','5','6','7','8','9','10','Jack','Queen','King','Ace']
-    let suites = ['Clubs','Dimaonds','Spades','Hearts']
+    let values = ['2','3','4','5','6','7','8','9','10','J','Q','K','A']
+    let suites = ['Clubs','Diamonds','Spades','Hearts']
 
     for(let s=0; s<suites.length; s++){
       for(let v = 0; v<values.length; v++){
           this.deck.push(card(values[v], suites[s]))
       }
     }
-
   }
-  printDeck(){
-    for(let x = 0; x<this.deck.length; x++){
-      document.getElementById("demo").innerHTML = this.deck[x].cardName;
+
+
+  draw(){
+    function cardId(type){
+      return document.getElementById(type);
+    }
+    function last(arrayName){
+      return arrayName[arrayName.length - 1];
     }
 
-
-  }
-  draw(){
-    if(this.deck.length < 1)return document.getElementById("new").innerHTML = "Out of cards!";
-
-
-    document.getElementById("new").innerHTML = this.deck[this.deck.length - 1].cardName;
+    if(this.deck.length < 1)return document.getElementById("new").innerHTML = 'Out of cards';
+    cardId("value").innerHTML = last(this.deck).value;
+    cardId("suit").innerHTML =  last(this.deck).suit;
+    this.deck.pop();
+    cardId("value2").innerHTML = last(this.deck).value;
+    cardId("suit2").innerHTML = last(this.deck).suit;
     this.deck.pop();
 
   }
@@ -63,7 +67,7 @@ deck.shuffle();
 
 
 function nextCard(){
-
     deck.draw();
+
 
 }
