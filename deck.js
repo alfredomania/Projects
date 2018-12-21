@@ -2,6 +2,7 @@ class Deck{
   constructor(){
     this.deck = [];
 
+
   }
   makeDeck(){
     let card = (value, suit) =>{
@@ -22,20 +23,27 @@ class Deck{
 
 
   draw(){
-    function cardId(type){
-      return document.getElementById(type);
+    function lastCard(theDeck){
+      return theDeck[theDeck.length - 1].value;
     }
-    function last(arrayName){
-      return arrayName[arrayName.length - 1];
-    }
+    var parent = document.getElementsByClassName('container')[0]
+    for(var i = 0; i <2; i++){
+      var div = document.createElement("div");
+      var nodeValue = document.createTextNode(lastCard(this.deck));
+      this.deck.pop();
+      div.appendChild(nodeValue);
+      div.className = "blank";
+      parent.appendChild(div);
+    };
 
-    if(this.deck.length < 1)return document.getElementById("new").innerHTML = 'Out of cards';
-    cardId("value").innerHTML = last(this.deck).value;
-    cardId("suit").innerHTML =  last(this.deck).suit;
-    this.deck.pop();
-    cardId("value2").innerHTML = last(this.deck).value;
-    cardId("suit2").innerHTML = last(this.deck).suit;
-    this.deck.pop();
+    //if(this.deck.length < 1)return document.getElementById("new").innerHTML = 'Out of cards';
+    //cardId("value").innerHTML = last(this.deck).value;
+    //cardId("suit").innerHTML =  last(this.deck).suit;
+    //this.deck.pop();
+
+    //cardId("value2").innerHTML = last(this.deck).value;
+    //cardId("suit2").innerHTML = last(this.deck).suit;
+    //this.deck.pop();
 
   }
   shuffle(){
